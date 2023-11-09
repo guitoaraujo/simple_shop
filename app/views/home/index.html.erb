@@ -1,1 +1,5 @@
-INDEX
+<% @products.each do |product| %>
+  <%= product.code %> <br>
+  <%= product.name %> <br>
+  <%= product.price %> <br>
+<% end %>
