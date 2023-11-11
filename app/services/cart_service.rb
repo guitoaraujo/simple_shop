@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class CartService
+  include BulkFixedDiscount
+  include BulkFlexibleDiscount
+  include FreeProduct
+
   def initialize(params)
     @products = params[:products]
     @result = []
@@ -39,14 +43,11 @@ class CartService
     case code
     when 'GR1'
       @result << { name: product.name, price: product.price }
-      @result << { name: product.name, price: 0 }
+      @result << FreeProduct.calculate(product, quantity)
     when 'SR1'
-      price = quantity >= 3 ? 450 : product.price
-      @result << { name: product.name, price: price }
+      @result << BulkFlexibleDiscount.calculate(product, quantity)
     when 'CF1'
-      special_price = ((product.price.to_f / 3) * 2)
-      price = quantity >= 3 ? special_price : product.price
-      @result << { name: product.name, price: price.round(3) }
+      @result << BulkFixedDiscount.calculate(product, quantity)
     end
   end
 
