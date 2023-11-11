@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe CartService do
@@ -37,14 +39,14 @@ RSpec.describe CartService do
       let(:expected_response) do
         [
           {
-            :name => "Green Tea",
-            :price => 311
+            name: 'Green Tea',
+            price: 311
           },
           {
-            :name => "Green Tea",
-            :price => 0
+            name: 'Green Tea',
+            price: 0
           },
-          { :total_price => 311 }
+          { total_price: 311 }
         ]
       end
 
@@ -58,25 +60,26 @@ RSpec.describe CartService do
       let(:expected_response) do
         [
           {
-            :name=>"Green Tea",
-            :price=>311
+            name: 'Green Tea',
+            price: 311
           },
           {
-            :name=>"Green Tea",
-            :price=>0},
-          {
-            :name=>"Strawberries",
-            :price=>450
+            name: 'Green Tea',
+            price: 0
           },
           {
-            :name=>"Strawberries",
-            :price=>450
+            name: 'Strawberries',
+            price: 450
           },
           {
-            :name=>"Strawberries",
-            :price=>450
+            name: 'Strawberries',
+            price: 450
           },
-          { :total_price => 1661 }
+          {
+            name: 'Strawberries',
+            price: 450
+          },
+          { total_price: 1661 }
         ]
       end
 
@@ -90,29 +93,28 @@ RSpec.describe CartService do
       let(:expected_response) do
         [
           {
-            :name=>"Green Tea",
-            :price=>311
+            name: 'Green Tea',
+            price: 311
           },
           {
-            :name=>"Green Tea",
-            :price=>0
+            name: 'Green Tea',
+            price: 0
           },
-          { :name=>"Strawberries",
-            :price=>500
+          { name: 'Strawberries',
+            price: 500 },
+          {
+            name: 'Coffee',
+            price: 748.667
           },
           {
-            :name=>"Coffee",
-            :price=>748.667
+            name: 'Coffee',
+            price: 748.667
           },
           {
-            :name=>"Coffee",
-            :price=>748.667
+            name: 'Coffee',
+            price: 748.667
           },
-          {
-            :name=>"Coffee",
-            :price=>748.667
-          },
-          { :total_price => 3057 }
+          { total_price: 3057 }
         ]
       end
 

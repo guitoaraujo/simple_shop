@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CartService
   def initialize(params)
     @products = params[:products]
@@ -10,10 +12,7 @@ class CartService
       product = find_product(code)
       next if product.nil?
 
-      quantity = value.to_i
-      quantity.times do
-        apply_conditions(code, product, quantity)
-      end
+      calculate_product_price(value, code, product)
     end
     calculate_total_price
     @result
@@ -27,6 +26,13 @@ class CartService
 
   def find_product(code)
     Product.find_by(code: code)
+  end
+
+  def calculate_product_price(value, code, product)
+    quantity = value.to_i
+    quantity.times do
+      apply_conditions(code, product, quantity)
+    end
   end
 
   def apply_conditions(code, product, quantity)
