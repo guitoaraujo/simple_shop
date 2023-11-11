@@ -12,10 +12,10 @@ class CartService
 
       quantity = value.to_i
       quantity.times do
-        apply_rules(code, product, quantity)
+        apply_conditions(code, product, quantity)
       end
     end
-
+    calculate_total_price
     @result
   end
 
@@ -29,7 +29,7 @@ class CartService
     Product.find_by(code: code)
   end
 
-  def apply_rules(code, product, quantity)
+  def apply_conditions(code, product, quantity)
     case code
     when 'GR1'
       @result << { name: product.name, price: product.price }
@@ -38,9 +38,14 @@ class CartService
       price = quantity >= 3 ? 450 : product.price
       @result << { name: product.name, price: price }
     when 'CF1'
-      special_price = ((product.price / 2) * 3)
+      special_price = ((product.price.to_f / 3) * 2)
       price = quantity >= 3 ? special_price : product.price
-      @result << { name: product.name, price: price }
+      @result << { name: product.name, price: price.round(3) }
     end
+  end
+
+  def calculate_total_price
+    total_price = @result.map { |product| product[:price] }.sum
+    @result << { total_price: total_price.round }
   end
 end
