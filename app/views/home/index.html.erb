@@ -1,5 +1,9 @@
-<% @products.each do |product| %>
-  <%= product.code %> <br>
-  <%= product.name %> <br>
-  <%= product.price %> <br>
+<%= form_with(scope: :products, url: new_cart_path, method: :get) do |form| %>
+  <% @products.each do |product| %>
+    <%= product.name %>
+    <%= product.price %> <br>
+    <%= form.number_field(product.code + "_quantity") %> <br>
+  <% end %>
+  <hr>
+  <%= form.submit 'Add to Cart' %>
 <% end %>
