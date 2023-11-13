@@ -1,24 +1,31 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Requirements
 
-Things you may want to cover:
+* Ruby 3.0.1
+* Rails 7.0.8
+* Postgresql
 
-* Ruby version
+## Bundle
 
-* System dependencies
+* run `bundle install`
+* run `rails db:create db:migrate db:seed`
+* run `rails server`
+* access `localhost:3000`
 
-* Configuration
+## Tests
 
-* Database creation
+* run `bundle exec rspec` for all tests
+* run `bundle exec rspec [path]` for a specific test
 
-* Database initialization
+## Explanations
 
-* How to run the test suite
+I tried to create a model for conditions and link it to product, but it did not go well due to complexity.
+So in the end I decided to create modules for the initial three conditions we have, they are flexible in terms of parameters and we can create more modules for new conditions.
 
-* Services (job queues, cache servers, search engines, etc.)
+I followed most of Rubocop suggestions.
+There are tests implemented using RSpec.
 
-* Deployment instructions
+There is something that I like to refactor first: loops.
 
-* ...
+
