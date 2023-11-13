@@ -34,16 +34,21 @@ class CartService
 
   def calculate_product_price(value, code, product)
     quantity = value.to_i
+    apply_free_product(code, product, quantity)
     quantity.times do
-      apply_conditions(code, product, quantity)
+      apply_discounts(code, product, quantity)
     end
   end
 
-  def apply_conditions(code, product, quantity)
+  def apply_free_product(code, product, quantity)
+    return unless code == 'GR1'
+
+    @result << FreeProduct.calculate(product, quantity)
+    @result.flatten!
+  end
+
+  def apply_discounts(code, product, quantity)
     case code
-    when 'GR1'
-      @result << { name: product.name, price: product.price }
-      @result << FreeProduct.calculate(product, quantity)
     when 'SR1'
       @result << BulkFlexibleDiscount.calculate(product, quantity)
     when 'CF1'

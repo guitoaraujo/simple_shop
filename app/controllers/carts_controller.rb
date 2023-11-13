@@ -5,10 +5,6 @@ class CartsController < ApplicationController
     @cart = CartService.new(cart_params).call
   end
 
-  def create
-    # cart = Cart.new(cart_params)
-  end
-
   private
 
   def cart_params
