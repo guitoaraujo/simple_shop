@@ -34,6 +34,8 @@ class CartService
 
   def calculate_product_price(value, code, product)
     quantity = value.to_i
+    return unless quantity.positive?
+
     apply_free_product(code, product, quantity)
     quantity.times do
       apply_discounts(code, product, quantity)

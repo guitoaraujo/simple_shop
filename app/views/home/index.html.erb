@@ -2,7 +2,7 @@
   <% @products.each do |product| %>
     <%= product.name %>
     <%= product.price %> <br>
-    <%= form.number_field(product.code + "_quantity") %> <br>
+    <%= form.number_field(product.code + "_quantity", min: 1) %> <br>
   <% end %>
   <hr>
   <%= form.submit 'Add to Cart' %>
